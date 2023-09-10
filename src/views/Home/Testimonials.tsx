@@ -39,7 +39,7 @@ const Testimonials = () => {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const testimonialContainerRef = useRef<HTMLDivElement | null>(null);
-  const autoTravelIntervalRef = useRef<number | null>(null);
+  const autoTravelIntervalRef = useRef<NodeJS.Timer | null>(null);
 
   useEffect(() => {
     // Auto-travel to the next card every 5 seconds
@@ -58,17 +58,19 @@ const Testimonials = () => {
 
   const handleDotClick = (index: number) => {
     setActiveIndex(index);
-    if (testimonialContainerRef.current) {
+    if (testimonialContainerRef.current instanceof HTMLElement) {
       const cardContainerWidth = testimonialContainerRef.current.offsetWidth;
-      const cardWidth =
-        testimonialContainerRef.current.children[index]?.offsetWidth;
+      const cardElement = testimonialContainerRef.current.children[
+        index
+      ] as HTMLElement;
+      const cardWidth = cardElement ? cardElement.offsetWidth : 0;
       const scrollLeft =
         cardWidth !== undefined
           ? index * cardWidth -
             cardContainerWidth / 2 +
             cardWidth / 2 +
             (index === testimonials.length - 1 ? cardWidth / 2 : 0)
-          : 0; // Check if cardWidth is undefined
+          : 0;
       testimonialContainerRef.current.scrollTo({
         left: scrollLeft,
         behavior: "smooth",
