@@ -55,13 +55,15 @@ const Navbar = ({ children }: NavbarProps) => {
       <div className="flex h-[10vh] justify-center">
         <div className="container flex items-center justify-between">
           <div>
-            <Image
-              src="/assets/Essentials/logo.png"
-              alt="Logo"
-              width={200}
-              height={200}
-              className=""
-            />
+            <Link href="/">
+              <Image
+                src="/assets/Essentials/logo.png"
+                alt="Logo"
+                width={200}
+                height={200}
+                className=""
+              />
+            </Link>
           </div>
           <div className="flex items-center justify-between space-x-20">
             <div className="flex justify-around space-x-12 text-neutral-500">
@@ -108,7 +110,10 @@ const Navbar = ({ children }: NavbarProps) => {
             </div>
           </div>
           <div className="flex">
-            <BsCart3 size={30} />
+            <Link href="/product/cart">
+              <BsCart3 size={30} />
+            </Link>
+
             <div className="divider divider-horizontal "></div>
             <DropdownMenu>
               <DropdownMenuTrigger>
